@@ -2,16 +2,12 @@ package com.excilys.formation.mongodb.dao;
 
 import java.net.UnknownHostException;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
 
-import org.jongo.Aggregate;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
 import com.excilys.formation.mongodb.model.Media;
 import com.google.common.collect.Lists;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 
@@ -63,8 +59,8 @@ public class JongoMediaLibrary implements MediaLibrary {
 	}
 
 	@Override
-	public Collection<Media> findMediaAfter(Date date) {
-		Iterable<Media> medias = this.mediaCollection.find("{year : {$gte: #}}", date).as(Media.class);
+	public Collection<Media> findMediaAfter(Integer year) {
+		Iterable<Media> medias = this.mediaCollection.find("{year : {$gte: #}}", year).as(Media.class);
 		return Lists.newArrayList(medias);
 	}
 
@@ -72,35 +68,6 @@ public class JongoMediaLibrary implements MediaLibrary {
 	public Collection<Media> findLastPublishedMedia(int maxResults) {
 		Iterable<Media> medias = this.mediaCollection.find("{}").sort("{year:-1}").limit(maxResults).as(Media.class);
 		return Lists.newArrayList(medias);
-	}
-
-	@Override
-	public Collection<Media> findByTag(String tag) {
-		Iterable<Media> medias = this.mediaCollection.find("{tags : #}", tag).as(Media.class);
-		return Lists.newArrayList(medias);
-	}
-
-	@Override
-	public void deleteNotViewedMediaBefore(Date date) {
-		this.mediaCollection.remove("{viewCount:0, year : {$lte : #}}", date);
-	}
-
-	@Override
-	public Collection<String> findAllTags(int startIndex, int maxResults) {
-		Collection<String> tags = new HashSet<String>();
-
-		Aggregate agg = this.mediaCollection.aggregate("{$project:{tags:1}}");
-		agg.and(" { $unwind : '$tags' }");
-		agg.and("{$skip : #}", startIndex);
-		agg.and("{$limit : #}", maxResults);
-
-		Iterable<BasicDBObject> tagsAsBDBO = agg.as(BasicDBObject.class);
-		for (BasicDBObject bdbo : tagsAsBDBO) {
-			String tag = bdbo.getString("tags");
-			tags.add(tag);
-		}
-
-		return tags;
 	}
 
 	@Override

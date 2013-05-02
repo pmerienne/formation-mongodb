@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.excilys.formation</groupId>
 	<artifactId>formation-mongodb</artifactId>
@@ -15,8 +14,6 @@
 		<!-- Dependencies versions -->
 		<mongo.version>2.10.1</mongo.version>
 		<jongo.version>0.2</jongo.version>
-		<spring.version>3.1.2.RELEASE</spring.version>
-		<spring-data-mongodb.version>1.1.1.RELEASE</spring-data-mongodb.version>
 		<guava.version>12.0.1</guava.version>
 		<joda-time.version>2.1</joda-time.version>
 		<junit.version>4.8.1</junit.version>
@@ -24,6 +21,7 @@
 		<slf4j-api.version>1.5.10</slf4j-api.version>
 		<slf4j-log4j12.version>1.5.10</slf4j-log4j12.version>
 	</properties>
+
 
 	<build>
 		<plugins>
@@ -53,12 +51,6 @@
 			<version>${jongo.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-mongodb</artifactId>
-			<version>${spring-data-mongodb.version}</version>
-		</dependency>
-
 		<!-- Utils -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -76,12 +68,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 

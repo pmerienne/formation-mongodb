@@ -1,7 +1,6 @@
 package com.excilys.formation.mongodb.dao;
 
 import java.util.Collection;
-import java.util.Date;
 
 import com.excilys.formation.mongodb.model.Media;
 
@@ -11,7 +10,7 @@ public interface MediaLibrary {
 	final static Integer DEFAULT_PORT = 27017;
 	final static String DEFAULT_DB_NAME = "medialibrary";
 	final static String DEFAULT_COLLECTION_NAME = "media";
-	
+
 	/**
 	 * Saves a given {@link Media}
 	 * 
@@ -45,8 +44,7 @@ public interface MediaLibrary {
 	 * Finds a {@link Media} by it's title
 	 * 
 	 * @param title
-	 * @return the {@link Media} or <code>null</code> if no {@link Media} was
-	 *         found with th egiven title
+	 * @return the {@link Media} or <code>null</code> if no {@link Media} was found with th egiven title
 	 * 
 	 */
 	Media findMediaByTitle(String title);
@@ -61,12 +59,12 @@ public interface MediaLibrary {
 	Collection<Media> findAllMedia(int startIndex, int maxResults);
 
 	/**
-	 * Finds all media created after a given {@link Date}
+	 * Finds all media created after a given year
 	 * 
-	 * @param date
+	 * @param year
 	 * @return
 	 */
-	Collection<Media> findMediaAfter(Date date);
+	Collection<Media> findMediaAfter(Integer year);
 
 	/**
 	 * Find latest media and limit results.
@@ -75,30 +73,5 @@ public interface MediaLibrary {
 	 * @return
 	 */
 	Collection<Media> findLastPublishedMedia(int maxResults);
-
-	/**
-	 * Finds {@link Media}s which have the given tags.
-	 * 
-	 * @param tags
-	 * @return
-	 */
-	Collection<Media> findByTag(String tag);
-
-	/**
-	 * Deletes media which were never viewed and created before a given
-	 * {@link Date}.
-	 * 
-	 * @param date
-	 */
-	void deleteNotViewedMediaBefore(Date date);
-
-	/**
-	 * Finds all tags
-	 * 
-	 * @param startIndex
-	 * @param maxResults
-	 * @return
-	 */
-	Collection<String> findAllTags(int startIndex, int maxResults);
 
 }
